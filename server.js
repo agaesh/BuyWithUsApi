@@ -1,5 +1,8 @@
+
 const express = require('express');
 const app = express();
+const {fire:fire} = require("./firebase");
+const { addDoc, collection } = require("firebase/firestore");
 
 // Define a route
 app.get('/', (req, res) => {

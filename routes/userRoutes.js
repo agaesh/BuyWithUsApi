@@ -5,7 +5,7 @@ const router = express.Router();
 const { fire } = require('../firebase');
 const controller = require("../Controllers/UserController")
 
-const userValidationRules = require("../validators/validationRules");
+const userRegisterValidationRules = require("../validators/UserRegisterValidationRules");
 
 const UserController = new controller();
 const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit, doc } = require('firebase/firestore');
@@ -13,7 +13,7 @@ const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, updateDoc, de
 router.get("/",async(req,res)=>{
     await UserController.fetchUser(req,res);
 })
-router.post("/",userValidationRules, async(req,res)=>{
+router.post("/",userRegisterValidationRules, async(req,res)=>{
     await UserController.CreateUser(req,res)
 })
 router.put("/", async(req,res)=>{

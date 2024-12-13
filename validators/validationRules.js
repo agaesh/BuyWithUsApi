@@ -1,7 +1,7 @@
 // validators/userValidator.js
 const { body } = require('express-validator');
 
-function userValidationRules(req) {
+const userRegisterValidationRules = () => {
   return [
     body('email')
       .isEmail().withMessage('Valid email is required'),
@@ -16,5 +16,6 @@ function userValidationRules(req) {
         return true;
       }),
   ];
-}
-module.exports = { userValidationRules };
+};
+
+module.exports = { userRegisterValidationRules };

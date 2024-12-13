@@ -13,16 +13,25 @@ const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, updateDoc, de
 router.get("/",async(req,res)=>{
     await UserController.fetchUser(req,res);
 })
-router.post("/",userRegisterValidationRules, async(req,res)=>{
-    await UserController.CreateUser(req,res)
-})
+// POST route for creating a user
+router.post('/', async (req, res) => {
+    // Check if there are validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  
+    // Proceed with creating the user (assuming UserController.CreateUser is defined)
+    await UserController.CreateUser(req, res);
+  }); 
 router.put("/", async(req,res)=>{
     await UserController.UpdateUser(req,res);
 })
 router.delete("/",[
-    body('id').notEmpty().
+    validator.body('id').notEmpty().
     withMessage('User ID must be provided').
-    isString().withMessage('User ID must be a valid string'),
+    isString().withMessage('User ID must be a valid string')
+    
 ], async(req,res)=>{
     await UserController.DeleteUser(req,res);
 })

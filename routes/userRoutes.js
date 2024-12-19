@@ -1,61 +1,38 @@
 const express = require('express');
+const validator = require("express-validator");
+const firebaseController = require("../Controllers/FirebaseController")
 const router = express.Router();
 const { fire } = require('../firebase');
-const { addDoc, collection, getDocs, getDoc, query, where, limit} = require('firebase/firestore');
+const controller = require("../Controllers/UserController")
 
+const userRegisterValidationRules = require("../validators/UserRegisterValidationRules");
 
-router.get("/", async (req, res) => {
-  try {
-    const { name, email, page = 1, pageSize = 100 } = req.query;  // Default pageSize of 100 users per page
-    const collectionRef = collection(fire, "users");
+const UserController = new controller();
+const { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit, doc } = require('firebase/firestore');
 
-    // Start with an empty query
-    let userQuery = query(collectionRef, limit(pageSize));
-
-    // Apply filters if provided
-    if (email) {
-      userQuery = query(userQuery, where("email", "==", email));
+router.get("/",async(req,res)=>{
+    await UserController.fetchUser(req,res);
+})
+// POST route for creating a user
+router.post('/', async (req, res) => {
+    // Check if there are validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-
-    if (name) {
-      userQuery = query(userQuery, where("name", "==", name));
-    }
-
-    // Fetch the documents
-    const querySnapshot = await getDocs(userQuery);
-    let response = [];
-    querySnapshot.forEach((doc) => {
-      response.push({ id: doc.id, ...doc.data() });
-    });
-
-    res.json({ users: response });
-  } catch (error) {
-    console.error("Error fetching documents:", error);
-    res.status(500).send("Error fetching documents");
-  }
-});
-
-
-// Route: Add a new user
-router.post('/create', async (req, res) => {
-  const {email,password,confirmpass} = req.body
-  try {
-    // Reference the 'users' collection in Firestore
-    const usersCollection = collection(fire, 'users');
-
-    // Add a document to the 'users' collection
-    const docRef = await addDoc(usersCollection, {
-      email,
-      password,
-      confirmpass,
-      createdAt: new Date(),
-    });
-
-    res.status(201).send({ message: 'User added successfully', docId: docRef.id });
-  } catch (error) {
-    console.error('Error adding user: ', error);
-    res.status(500).send({ error: 'Failed to add user' });
-  }
-});
-
+  
+    // Proceed with creating the user (assuming UserController.CreateUser is defined)
+    await UserController.CreateUser(req, res);
+  }); 
+router.put("/", async(req,res)=>{
+    await UserController.UpdateUser(req,res);
+})
+router.delete("/",[
+    validator.body('id').notEmpty().
+    withMessage('User ID must be provided').
+    isString().withMessage('User ID must be a valid string')
+    
+], async(req,res)=>{
+    await UserController.DeleteUser(req,res);
+})
 module.exports = router;

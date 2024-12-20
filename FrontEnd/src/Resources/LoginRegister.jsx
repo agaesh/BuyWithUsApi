@@ -11,6 +11,20 @@ const LoginPage = () => {
     setConfirmPassword(""); // Clear confirmPassword when toggling
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (register) {
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      console.log("Registering with:");
+    } else {
+      console.log("Logging in with:");
+    }
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
 
   return (
     <div>

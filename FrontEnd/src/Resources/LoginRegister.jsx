@@ -16,42 +16,21 @@ const LoginPage = () => {
     <div>
       <h2>{register ? "Register" : "Login"}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+          <InputGroup label = {"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
+          <InputGroup label = {"Password"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
         {register && (
-          <div>
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
+          <InputGroup label={"Confirm Password"} type={"password"} id={"confirmPass"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
         )}
-        <button type="submit">{register ? "Register" : "Login"}</button>
+        <button type="submit" className="formButton">
+          {register ? "Register" : "Login"}
+        </button>
       </form>
       <a
-        style={{ cursor: "pointer", color: "blue", textDecoration: "underline" }}
+        style={{
+          cursor: "pointer",
+          color: "blue",
+          textDecoration: "underline",
+        }}
         onClick={handleProcess}
       >
         {register ? "Switch to Login" : "Switch to Register"}

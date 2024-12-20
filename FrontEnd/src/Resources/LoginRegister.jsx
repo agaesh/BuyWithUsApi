@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputGroup from "./InputGroup";
 import '../assets/css/InputGroup.css'
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +28,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="Container">
+      <img src=""/>
       <h2>{register ? "Register" : "Login"}</h2>
       <form onSubmit={handleSubmit}>
           <InputGroup label = {"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Menubar from './Menubar'
 import InputGroup from "./InputGroup";
 import '../assets/css/InputGroup.css'
+import '../assets/css/LoginRegister.css'
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,12 +30,16 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+      <Menubar/>
+    <div className="container">
       <div className="logo">
         <h2>BUY<span style = {{color:"red"}}>WITHUS</span></h2>
       </div> 
+      <p>{register ? "Create Seller Account" : "Login as Seller"}</p>
       <form onSubmit={handleSubmit}>
           <InputGroup label = {"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
-          <InputGroup label = {"Password"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
+          <InputGroup label = {"Password"} type={"password"} id={"password"} value={password} onChange={(e) => setPassword(e.target.value)} required/>
         {register && (
             <div>
             <InputGroup 

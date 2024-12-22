@@ -31,6 +31,7 @@ const LoginPage = () => {
       <div className="logo">
         <h2>BUY<span style = {{color:"red"}}>WITHUS</span></h2>
       </div> 
+      <p>{register ? "Create Seller Account" : "Login as Seller"}</p>
       <form onSubmit={handleSubmit}>
           <InputGroup label = {"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
           <InputGroup label = {"Password"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>

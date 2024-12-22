@@ -2,14 +2,14 @@
  display: flex;
  align-items: flex-start;
  flex-direction: column;
- margin-bottom:20px;
+ margin-bottom: 10px;
 }
 .inputGroup label{
     font-weight: 600;
 }
 
 input{
-    padding:15px;
+    padding:12px;
     width:300px;
     border:1px solid #ccc;
 }

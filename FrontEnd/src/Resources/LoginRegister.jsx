@@ -28,14 +28,33 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="Container">
-      <img src=""/>
-      <h2>{register ? "Register" : "Login"}</h2>
+      <div className="logo">
+        <h2>BUY<span style = {{color:"red"}}>WITHUS</span></h2>
+      </div> 
       <form onSubmit={handleSubmit}>
           <InputGroup label = {"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
           <InputGroup label = {"Password"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} required/>
         {register && (
-          <InputGroup label={"Confirm Password"} type={"password"} id={"confirmPass"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+            <div>
+            <InputGroup 
+              label={"Confirm Password"} 
+              type={"password"} 
+              id={"confirmPass"} 
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              required
+            />
+          </div>
+        )}
+        {!register && (
+          <div style={{ textAlign: "right", marginTop: "10px" }}>
+            <a 
+              href="/forgot-password" 
+              style={{ color: "#007BFF", textDecoration: "none", fontSize: "14px", marginTop:"10px"}}
+            >
+              Forgot Password?
+            </a>
+          </div>
         )}
         <button type="submit" className="formButton">
           {register ? "Register" : "Login"}
@@ -44,7 +63,9 @@ const LoginPage = () => {
       <a
         style={{
           cursor: "pointer",
-          color: "blue",
+          color: "gray",
+          fontSize: "15px",
+          margin:"12",
           textDecoration: "underline",
         }}
         onClick={handleProcess}
@@ -52,6 +73,7 @@ const LoginPage = () => {
         {register ? "Switch to Login" : "Switch to Register"}
       </a>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect} from "react";
-import useNavigate from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Menubar from './Menubar'
 import InputGroup from "./InputGroup";
 import '../assets/css/InputGroup.css'

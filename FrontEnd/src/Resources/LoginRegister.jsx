@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Menubar from './Menubar'
 import InputGroup from "./InputGroup";
 import '../assets/css/InputGroup.css'
-import '../assets/css/LoginRegister.css'
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

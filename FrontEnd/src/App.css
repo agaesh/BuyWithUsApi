@@ -1,22 +1,27 @@
 #root {
-  max-width: 1280px;
+  /*removed the max-width to root because it cannot be full width of the screen*/
+  /* max-width: 1280px; */
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  /*removed the unncessary padding to root because outside of content have gaps
+  /* padding: 2rem; */
   text-align: center;
   font-family: "Montserrat",sans-serif;
   height: 100%;
+ 
 }
 .container{
-  height:100vh;
+  /*made the container height 100vh so it can take the full height of the screen*/
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .container .content{
   width: 400px;
   height: fit-content;
-
-
+}
 
 
 

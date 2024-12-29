@@ -1,0 +1,61 @@
+/* Sidebar styling */
+
+.sidebar {
+    background-color: rgb(59, 57, 57);
+    color:white;
+    /* position: fixed;
+    left: 0;
+    top: 0; */
+    height: 100%;
+    width: 200px;
+    padding-top: 20px; /* Space from top */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+.sidebar .sidebar-list {
+    padding-top:40px;
+}
+
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: justify;
+    cursor: pointer;
+}
+.sidebar ul li ul li a {
+    margin-left: 20px;
+    font-size: 12px;
+    color: #fff;
+}
+.sidebar ul li ul li:hover, .sidebar ul li ul li a:hover {
+    background-color: #333;
+}
+.sub-menu a:hover{
+    background-color: green;
+}
+
+.sidebar ul li a:hover {
+    background-color: darkred; /* Hover effect */
+}
+
+/* Content area */
+.content {
+    /* Ensures the content doesn't overlap with the sidebar */
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+p {
+    font-size: 18px;
+}

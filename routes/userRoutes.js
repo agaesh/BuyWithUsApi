@@ -1,5 +1,4 @@
 const express = require('express');
-const validator = require("express-validator");
 const router = express.Router();
 const { fire } = require('../firebase');
 const controller = require("../Controllers/UserController")

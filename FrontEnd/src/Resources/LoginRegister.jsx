@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, useEffect} from "react";
+import useNavigate from 'react-router-dom';
 import Menubar from './Menubar'
 import InputGroup from "./InputGroup";
 import '../assets/css/InputGroup.css'
@@ -7,7 +9,9 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [register, setRegister] = useState(false);
-
+  const [RegisterSucess, setRegisterSucess] = useState(false);
+  const navigate = useNavigate(); // Import useNavigate from react-router-dom
+  
   const handleProcess = () => {
     setRegister((prev) => !prev); // Toggle the `register` state
     setConfirmPassword(""); // Clear confirmPassword when toggling
@@ -16,10 +20,31 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (register) {
+
+      if(email === "" || password === "" || confirmPassword === ""){
+        alert("Please fill in all fields!");
+        return;
+      }
       if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
       }
+      fetch('http://localhost:5000/api/user-management', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },  
+        body: JSON.stringify({ email, password }),
+      }).then((response) => {
+        if (response.ok) {
+          setRegisterSucess(true);
+          alert("Registration Successful!");
+        } else {
+          alert("Registration Failed!");
+        }
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
       console.log("Registering with:");
     } else {
       console.log("Logging in with:");
@@ -27,6 +52,14 @@ const LoginPage = () => {
     console.log("Email:", email);
     console.log("Password:", password);
   };
+  useEffect(() => {
+    if (RegisterSucess) {
+      setTimeout(() => {
+        // Instead of using window.location.href, use navigate to redirect
+        navigate("/account-setup");  // Navigate to account-setup page
+      }, 2000); // Wait 2 seconds before redirecting
+    }
+  }, [RegisterSucess, navigate]); // useEffect depends on RegisterSucess
 
   return (
     <>

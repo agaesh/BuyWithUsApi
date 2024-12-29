@@ -1,6 +1,5 @@
 const express = require('express');
 const validator = require("express-validator");
-const firebaseController = require("../Controllers/FirebaseController")
 const router = express.Router();
 const { fire } = require('../firebase');
 const controller = require("../Controllers/UserController")
@@ -23,7 +22,7 @@ router.post('/', async (req, res) => {
   
     // Proceed with creating the user (assuming UserController.CreateUser is defined)
     await UserController.CreateUser(req, res);
-  }); 
+}); 
 router.put("/", async(req,res)=>{
     await UserController.UpdateUser(req,res);
 })

@@ -3,6 +3,7 @@ import LoginPage from './Resources/LoginRegister'
 import {BrowserRouter,Routes,Route} from 'react-router'
 import './App.css'
 import DashBoard from './Resources/Dashboard'
+import AccountSetup from './Resources/AccountSetup'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path = "/user-management" element={<DashBoard activePage={"user-management"} />} />
+          <Route path = "/account-setup" element={<AccountSetup/>} />
         </Routes>
     </BrowserRouter>
     </>

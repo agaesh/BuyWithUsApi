@@ -5,48 +5,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './Resources/LoginRegister';
 import DashBoard from './Resources/Dashboard';
 import AccountSetup from './Resources/AccountSetup';
-import {app, auth, fire} from './firebaseConfig';
+import { AuthProvider, useAuth } from './Context/AuthContext';
 import './App.css';
 
-const AuthContext = createContext();
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  const login = (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
-  };
-
-  const logout = () => {
-    return auth.signOut();
-  };
-
-  const value = {
-    currentUser,
-    login,
-    logout,
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
-};
 
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -73,14 +34,14 @@ const NotFound = () => {
 function App() {
   return (
     <AuthProvider>
-    <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<PrivateRoute><DashBoard activePage={"dashboard"} /></PrivateRoute>} />
           <Route path="/account-setup" element={<PrivateRoute><AccountSetup /></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
     </AuthProvider>
   );
 }

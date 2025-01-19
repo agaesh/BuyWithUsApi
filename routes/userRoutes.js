@@ -6,7 +6,7 @@ const controller = require("../Controllers/UserController")
 const crypto =  require("crypto");
 const nodemailer = require("nodemailer");
 require('dotenv').config();
-const validator = require('express-validator');
+
 
 // const userRegisterValidationRules = require("../validators/UserRegisterValidationRules");
 
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     // Check if there are validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array()});
     }
   
     // Proceed with creating the user (assuming UserController.CreateUser is defined)
